@@ -54,7 +54,7 @@ def queue_url(q):
 
 #The main function for creating threads and queues.
 def main():
-    #Generating payloads here
+#Generating payloads here
     print "Custom Character * found in URL, treating it as the injection point"
     for items in payloads:
         for i in range(0,16):
