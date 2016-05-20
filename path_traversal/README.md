@@ -5,6 +5,13 @@ Requires **requests** module to be installed:
 ```
 pip install requests
 ```
+* Syntax:
+ * Needs a wildcard * to be present in the URL where you want to inject the payloads, example:
+ ```
+  http://www.example.com/request.php?file=*
+ ```
+ * The wildcard would automatically be replaced with the payloads during runtime.
+ 
 
 * By default, runs 5 requests in parellel, for better speed and reliability
 * Has Two debug levels:
