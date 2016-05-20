@@ -44,7 +44,7 @@ def queue_url(q):
             if dbg == 2:
                 f2.write("URL: "+r_url+"\nStatus Code: "+r_status+"\nResponse:\n"+r.text+"\n\n\n==================================================================\n\n\n")
             f.write("URL: "+r_url+"\n"+"Status Code: "+r_status+"\n\n\n")
-            if r_status == 200:
+            if r_status == "200":
                 f1.write("URL: "+r_url+"\n"+"Response:\n"+r.text+"\n\n\n==================================================================\n\n\n")
             q.task_done()
         except requests.exceptions.Timeout:
