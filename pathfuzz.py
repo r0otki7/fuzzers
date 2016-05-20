@@ -1,6 +1,6 @@
 #!/bin/bash
 #************************************************************
-#pathfuzz.py: Fuzzing script for Path Traversal.
+#pathfuzz.py: A multi-threaded fuzzing script for Path Traversal.
 #************************************************************
 #Written by r0otki7 <https://github.com/r0otki7/>
 #************************************************************
