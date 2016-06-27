@@ -10,13 +10,17 @@ import urllib
 import threading
 import Queue
 import sys
+import time
 
 #Creating the queue
 q = Queue.Queue(maxsize=0)
 q_thread = 5
 
 #Taking input and initializing lists
-url = raw_input("URL to test: ")
+if len(sys.argv) < 2:
+    sys.exit("Usage: "+sys.argv[0]+" <url>")
+else:
+    url = sys.argv[1]
 if str(url).find("*") == -1:
     sys.exit("No custom injection point found, Exiting...")
 dbg = int(raw_input("Enter Debug Level (1-2): "))
@@ -37,15 +41,15 @@ if dbg == 2:
 def queue_url(q):
     while True:
         try:
-            r = requests.get(q.get())
-            r_url = r.url
+            r = requests.get(q.get(), timeout=30, verify=False)
+            r_url = r.url.encode('utf-8')
             r_status = str(r.status_code)
             print r_url+"\t"+r_status
             if dbg == 2:
-                f2.write("URL: "+r_url+"\nStatus Code: "+r_status+"\nResponse:\n"+r.text+"\n\n\n==================================================================\n\n\n")
+                f2.write("URL: "+r_url+"\nStatus Code: "+r_status+"\nResponse:\n"+r.text.encode('utf-8')+"\n\n\n==================================================================\n\n\n")
             f.write("URL: "+r_url+"\n"+"Status Code: "+r_status+"\n\n\n")
             if r_status == "200":
-                f1.write("URL: "+r_url+"\n"+"Response:\n"+r.text+"\n\n\n==================================================================\n\n\n")
+                f1.write("URL: "+r_url+"\n"+"Response:\n"+r.text.encode('utf-8')+"\n\n\n==================================================================\n\n\n")
             q.task_done()
         except requests.exceptions.Timeout:
             print "Request Timed out"
@@ -54,7 +58,7 @@ def queue_url(q):
 
 #The main function for creating threads and queues.
 def main():
-#Generating payloads here
+    #Generating payloads here
     print "Custom Character * found in URL, treating it as the injection point"
     for items in payloads:
         for i in range(0,16):
@@ -75,6 +79,7 @@ def main():
     
 #Putting the items in queue here
     for url_param in url_list:
+        time.sleep(0.5)     #Adjust this accordingly to throttle requests.
         q.put(url_param)
     q.join()
 
