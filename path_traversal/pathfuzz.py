@@ -79,8 +79,11 @@ def main():
     
 #Putting the items in queue here
     for url_param in url_list:
-        time.sleep(0.5)     #Adjust this accordingly to throttle requests.
-        q.put(url_param)
+        try:
+            time.sleep(0.5)     #Adjust this accordingly to throttle requests.
+            q.put(url_param)
+        except KeyboardInterrupt:
+            sys.exit("\nExiting...")
     q.join()
 
 
