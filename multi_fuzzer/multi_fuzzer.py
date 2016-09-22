@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #************************************************************
-#fuzzer.py: Simple Multi-Fuzzer.
+#multi_fuzzer.py: Simple Multi-Fuzzer.
 #************************************************************
 #Written by r0otki7 <https://github.com/r0otki7/>
 #************************************************************
